@@ -2,6 +2,8 @@
 
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { Header } from "./header";
+
 import {
     ShieldCheckIcon,
     SmartphoneIcon,
@@ -9,7 +11,6 @@ import {
     CheckCircleIcon,
     XCircleIcon,
     AlertCircleIcon,
-    DropletIcon,
     TrendingUpIcon,
     AwardIcon,
 } from "lucide-react";
@@ -20,156 +21,201 @@ interface LandingPageProps {
 
 export function LandingPage({ onStart }: LandingPageProps) {
     return (
-        <div className="min-h-screen flex flex-col bg-white text-[#27231E]">
-            {/* Header */}
-            <header className="sticky top-0 z-40 bg-white/95 border-b border-[#E8E4E0] backdrop-blur">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                        <div className="bg-[#B40023] p-2.5 rounded-xl shadow-sm">
-                            <DropletIcon className="w-6 h-6 text-white" />
+        <div className="min-h-screen flex flex-col bg-[#F0F9FF] text-slate-900">
+            <Header showButton={true} onButtonClick={onStart} />
+
+            {/* HERO con imagen de fondo y blobs */}
+            <section className="relative overflow-hidden">
+                <div className="absolute inset-0 -z-10">
+                    <img
+                        src="/fondo.jpg"
+                        alt="Madre con su bebé"
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+                <div className="absolute inset-0 -z-[5]">
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#E0F2FE]/60 via-[#BAE6FD]/40 to-[#DBEAFE]/60" />
+                    <div className="absolute -top-20 -left-16 w-64 h-64 bg-sky-200 rounded-full blur-3xl opacity-70" />
+                    <div className="absolute -bottom-24 -right-10 w-72 h-72 bg-cyan-100 rounded-full blur-3xl opacity-70" />
+                </div>
+
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div className="inline-flex items-center gap-2 bg-white/80 text-sky-900 px-6 py-2 rounded-full text-sm font-semibold mb-6 shadow-sm border border-sky-100">
+                            <span className="inline-block w-2 h-2 rounded-full bg-[#DB162F]" />
+                            <span>Tu compañero de confianza en nutrición infantil</span>
                         </div>
-                        <div>
-                            <h1 className="text-2xl font-bold text-[#B40023]">ANMI</h1>
-                            <p className="text-xs text-[#8B8680]">
-                                Prevención de Anemia Infantil
+                        <h2 className="text-5xl sm:text-6xl font-extrabold text-slate-900 mb-6 leading-tight text-balance drop-shadow-sm">
+                            Prevenir la anemia infantil es posible
+                        </h2>
+                        <p className="text-lg sm:text-xl text-slate-700 mb-6 leading-relaxed">
+                            ANMI es un asistente educativo que te ofrece información clara y
+                            basada en guías oficiales para ayudarte a prevenir la anemia por
+                            deficiencia de hierro en tu bebé, especialmente durante los
+                            primeros meses de alimentación complementaria.
+                        </p>
+
+                        {/* Badge ético/privacidad */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 rounded-full text-xs text-sky-800 mb-6 border border-sky-100">
+                            <ShieldCheckIcon className="w-4 h-4" />
+                            <span>Sin cuentas · Sin almacenamiento permanente · Información respaldada</span>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Button
+                                onClick={onStart}
+                                className="px-8 py-4 text-lg font-semibold bg-[#DB162F] hover:bg-yellow-400 shadow-md text-white"
+                            >
+                                Comienza ahora
+                                <ArrowRightIcon className="w-5 h-5 ml-2" />
+                            </Button>
+                            <Button
+                                variant="outline"
+                                className="px-8 py-4 text-lg font-semibold border-sky-200 text-sky-900 bg-white/70 hover:bg-sky-50"
+                            >
+                                Saber más
+                            </Button>
+                        </div>
+                    </div>
+
+                    {/* Columna derecha: tarjetas (sin foto porque ya tenemos fondo visual fuerte) */}
+                    <div className="hidden md:grid grid-cols-2 gap-4">
+                        <Card className="p-6 bg-white/80 border border-sky-100 backdrop-blur hover:shadow-lg transition-shadow rounded-2xl">
+                            <div className="bg-sky-100 text-sky-700 p-3 rounded-xl w-fit mb-4">
+                                <TrendingUpIcon className="w-6 h-6" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-2 text-sm">
+                                Alimentación segura
+                            </h3>
+                            <p className="text-xs text-slate-600">
+                                Información sobre alimentos ricos en hierro para tu bebé.
                             </p>
-                        </div>
+                        </Card>
+
+                        <Card className="p-6 bg-white/80 border border-sky-100 backdrop-blur hover:shadow-lg transition-shadow rounded-2xl">
+                            <div className="bg-[#DB162F] text-white p-3 rounded-xl w-fit mb-4">
+                                <AwardIcon className="w-6 h-6" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-2 text-sm">
+                                Basado en guías oficiales
+                            </h3>
+                            <p className="text-xs text-slate-600">
+                                Contenido inspirado en recomendaciones del MINSA, OMS y OPS.
+                            </p>
+                        </Card>
+
+                        <Card className="p-6 bg-white/80 border border-sky-100 backdrop-blur hover:shadow-lg transition-shadow rounded-2xl">
+                            <div className="bg-emerald-50 text-emerald-700 p-3 rounded-xl w-fit mb-4">
+                                <ShieldCheckIcon className="w-6 h-6" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-2 text-sm">
+                                Privacidad cuidada
+                            </h3>
+                            <p className="text-xs text-slate-600">
+                                No se crean cuentas ni se guardan tus datos de forma permanente.
+                            </p>
+                        </Card>
+
+                        <Card className="p-6 bg-white/80 border border-sky-100 backdrop-blur hover:shadow-lg transition-shadow rounded-2xl">
+                            <div className="bg-slate-900 text-white p-3 rounded-xl w-fit mb-4">
+                                <SmartphoneIcon className="w-6 h-6" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-2 text-sm">
+                                Disponible 24/7
+                            </h3>
+                            <p className="text-xs text-slate-600">
+                                Funciona en tu celular o computadora, cuando lo necesites.
+                            </p>
+                        </Card>
                     </div>
-                    <Button onClick={onStart} className="px-4 py-2">
-                        <ArrowRightIcon className="w-4 h-4 mr-2" />
-                        <span className="hidden sm:inline">Usar ANMI</span>
-                        <span className="sm:hidden">Usar</span>
-                    </Button>
-                </div>
-            </header>
-
-            {/* Hero */}
-            <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div className="inline-block bg-[#C4E0F0] text-[#27231E] px-6 py-2 rounded-full text-sm font-semibold mb-6 shadow-sm">
-                        Tu compañero de confianza en nutrición infantil
-                    </div>
-                    <h2 className="text-5xl sm:text-6xl font-bold text-[#27231E] mb-6 leading-tight text-balance">
-                        Prevenir la anemia infantil es posible
-                    </h2>
-                    <p className="text-xl text-[#3D3A35] mb-8 leading-relaxed">
-                        ANMI es un chatbot educativo que proporciona información clara,
-                        segura y validada por nutricionistas para ayudarte a prevenir la
-                        anemia en niños de 0 a 2 años.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                        <Button
-                            onClick={onStart}
-                            className="px-8 py-4 text-lg font-semibold"
-                        >
-                            Comienza gratis ahora
-                            <ArrowRightIcon className="w-5 h-5 ml-2" />
-                        </Button>
-                        <Button
-                            variant="outline"
-                            className="px-8 py-4 text-lg font-semibold"
-                        >
-                            Saber más
-                        </Button>
-                    </div>
-                </div>
-
-                {/* Columna derecha: tarjetas */}
-                <div className="hidden md:grid grid-cols-2 gap-6">
-                    <Card className="p-6 bg-[#C4E0F0] border-[#B3D4E8] hover:shadow-lg transition-shadow">
-                        <div className="bg-[#6B9EBD] text-white p-3 rounded-lg w-fit mb-4">
-                            <TrendingUpIcon className="w-6 h-6" />
-                        </div>
-                        <h3 className="font-bold text-[#27231E] mb-2">
-                            Alimentación segura
-                        </h3>
-                        <p className="text-sm text-[#3D3A35]">
-                            Guía sobre alimentos ricos en hierro.
-                        </p>
-                    </Card>
-
-                    <Card className="p-6 bg-[#FDF0B2] border-[#F5E899] hover:shadow-lg transition-shadow">
-                        <div className="bg-[#C9A700] text-white p-3 rounded-lg w-fit mb-4">
-                            <AwardIcon className="w-6 h-6" />
-                        </div>
-                        <h3 className="font-bold text-[#27231E] mb-2">Validado</h3>
-                        <p className="text-sm text-[#3D3A35]">Basado en MINSA y OMS.</p>
-                    </Card>
-
-                    <Card className="p-6 bg-[#C4E0F0] border-[#B3D4E8] hover:shadow-lg transition-shadow">
-                        <div className="bg-[#6B9EBD] text-white p-3 rounded-lg w-fit mb-4">
-                            <ShieldCheckIcon className="w-6 h-6" />
-                        </div>
-                        <h3 className="font-bold text-[#27231E] mb-2">Privado y seguro</h3>
-                        <p className="text-sm text-[#3D3A35]">
-                            Tus datos están protegidos.
-                        </p>
-                    </Card>
-
-                    <Card className="p-6 bg-[#F5F3F0] border-[#E8E4E0] hover:shadow-lg transition-shadow">
-                        <div className="bg-[#6B9EBD] text-white p-3 rounded-lg w-fit mb-4">
-                            <SmartphoneIcon className="w-6 h-6" />
-                        </div>
-                        <h3 className="font-bold text-[#27231E] mb-2">Disponible 24/7</h3>
-                        <p className="text-sm text-[#3D3A35]">
-                            Funciona en móvil y escritorio.
-                        </p>
-                    </Card>
                 </div>
             </section>
 
             {/* ¿Por qué prevenir la anemia? */}
-            <section className="bg-[#C4E0F0]/20 py-16 sm:py-24">
+            <section className="bg-[#FFF9E6] py-16 sm:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl sm:text-5xl font-bold text-[#27231E] mb-4">
+                        <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
                             ¿Por qué prevenir la anemia infantil?
                         </h2>
-                        <p className="text-xl text-[#3D3A35] max-w-3xl mx-auto">
+                        <p className="text-xl text-slate-600 max-w-3xl mx-auto">
                             La anemia afecta el desarrollo cognitivo, físico e inmunológico
-                            de los niños. La prevención desde el nacimiento es clave.
+                            de los niños. Cuidar la alimentación desde el inicio marca una
+                            gran diferencia.
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-6">
-                        <Card className="p-8 bg-white border border-[#E8E4E0] hover:shadow-lg transition-shadow">
-                            <div className="w-12 h-12 bg-[#C4E0F0] rounded-lg flex items-center justify-center mb-4">
-                                <span className="text-2xl">🧠</span>
+                        <Card className="relative p-8 border border-sky-100 hover:shadow-lg transition-shadow rounded-2xl overflow-hidden">
+                            <div className="absolute inset-0">
+                                <img
+                                    src="/desarrollo-cognitivo.jpg"
+                                    alt="Desarrollo cognitivo"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-white/85" />
                             </div>
-                            <h3 className="font-bold text-[#27231E] mb-3">
-                                Desarrollo cognitivo
-                            </h3>
-                            <p className="text-[#3D3A35] text-sm">
-                                La falta de hierro afecta la memoria, concentración y
-                                aprendizaje en etapas críticas del desarrollo cerebral.
-                            </p>
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center mb-4">
+                                    <span className="text-2xl">🧠</span>
+                                </div>
+                                <h3 className="font-bold text-slate-900 mb-3">
+                                    Desarrollo cognitivo
+                                </h3>
+                                <p className="text-slate-600 text-sm">
+                                    La falta de hierro puede afectar la memoria, la atención y el
+                                    aprendizaje en etapas clave del desarrollo cerebral.
+                                </p>
+                            </div>
                         </Card>
 
-                        <Card className="p-8 bg-white border border-[#E8E4E0] hover:shadow-lg transition-shadow">
-                            <div className="w-12 h-12 bg-[#C4E0F0] rounded-lg flex items-center justify-center mb-4">
-                                <span className="text-2xl">💪</span>
+                        <Card className="relative p-8 border border-sky-100 hover:shadow-lg transition-shadow rounded-2xl overflow-hidden">
+                            <div className="absolute inset-0">
+                                <img
+                                    src="/crecimiento-fisico.jpg"
+                                    alt="Crecimiento físico"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-white/85" />
                             </div>
-                            <h3 className="font-bold text-[#27231E] mb-3">
-                                Crecimiento físico
-                            </h3>
-                            <p className="text-[#3D3A35] text-sm">
-                                El hierro es esencial para el crecimiento normal, energía y
-                                desarrollo motor de tu bebé.
-                            </p>
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center mb-4">
+                                    <span className="text-2xl">💪</span>
+                                </div>
+                                <h3 className="font-bold text-slate-900 mb-3">
+                                    Crecimiento físico
+                                </h3>
+                                <p className="text-slate-600 text-sm">
+                                    El hierro es clave para que tu bebé tenga energía, se mueva,
+                                    juegue y crezca de forma saludable.
+                                </p>
+                            </div>
                         </Card>
 
-                        <Card className="p-8 bg-white border border-[#E8E4E0] hover:shadow-lg transition-shadow">
-                            <div className="w-12 h-12 bg-[#FDF0B2] rounded-lg flex items-center justify-center mb-4">
-                                <span className="text-2xl">🛡️</span>
+
+                        <Card className="relative p-8 border border-sky-100 hover:shadow-lg transition-shadow rounded-2xl overflow-hidden">
+                            <div className="absolute inset-0">
+                                <img
+                                    src="/sistema-inmunologico.jpg"
+                                    alt="Sistema inmunológico"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-white/85" />
                             </div>
-                            <h3 className="font-bold text-[#27231E] mb-3">
-                                Sistema inmunológico
-                            </h3>
-                            <p className="text-[#3D3A35] text-sm">
-                                Un sistema inmune fuerte previene infecciones y enfermedades
-                                frecuentes en la infancia.
-                            </p>
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 bg-sky-50 rounded-2xl flex items-center justify-center mb-4">
+                                    <span className="text-2xl">🛡️</span>
+                                </div>
+                                <h3 className="font-bold text-slate-900 mb-3">
+                                    Sistema inmunológico
+                                </h3>
+                                <p className="text-slate-600 text-sm">
+                                    Una buena nutrición ayuda a que el sistema de defensas de tu
+                                    bebé sea más fuerte frente a infecciones y enfermedades.
+                                </p>
+                            </div>
                         </Card>
+
                     </div>
                 </div>
             </section>
@@ -177,7 +223,7 @@ export function LandingPage({ onStart }: LandingPageProps) {
             {/* Qué hace y qué NO hace ANMI */}
             <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl sm:text-5xl font-bold text-[#27231E] mb-4">
+                    <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
                         ¿Qué hace ANMI?
                     </h2>
                 </div>
@@ -186,28 +232,27 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     {/* Sí puede */}
                     <div>
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-10 h-10 bg-[#10B981]/10 rounded-full flex items-center justify-center">
-                                <CheckCircleIcon className="w-6 h-6 text-[#10B981]" />
+                            <div className="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center">
+                                <CheckCircleIcon className="w-6 h-6 text-emerald-600" />
                             </div>
-                            <h3 className="text-2xl font-bold text-[#27231E]">
+                            <h3 className="text-2xl font-bold text-slate-900">
                                 ANMI SÍ puede:
                             </h3>
                         </div>
                         <div className="space-y-4">
                             {[
-                                "Proporcionar información sobre alimentación rica en hierro.",
-                                "Resolver dudas sobre lactancia y alimentación complementaria.",
-                                "Explicar síntomas normales del desarrollo infantil.",
-                                "Orientar sobre hábitos saludables de nutrición.",
-                                "Detectar posibles señales de alerta y recomendarte consultar.",
-                                "Guardar información de tu bebé de forma segura (con consentimiento).",
+                                "Darte información clara sobre alimentos ricos en hierro para tu bebé.",
+                                "Responder preguntas comunes sobre lactancia y alimentación complementaria.",
+                                "Explicar de manera sencilla cómo la buena nutrición ayuda al crecimiento.",
+                                "Orientarte con hábitos saludables para ayudar a prevenir la anemia.",
+                                "Usar solo la información que ingreses durante la conversación.",
                             ].map((item, i) => (
                                 <div
                                     key={i}
-                                    className="flex gap-3 p-4 bg-[#10B981]/5 rounded-lg border border-[#10B981]/20"
+                                    className="flex gap-3 p-4 bg-emerald-50 rounded-xl border border-emerald-100"
                                 >
-                                    <CheckCircleIcon className="w-5 h-5 text-[#10B981] flex-shrink-0 mt-0.5" />
-                                    <p className="text-[#3D3A35] text-sm">{item}</p>
+                                    <CheckCircleIcon className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                                    <p className="text-slate-700 text-sm">{item}</p>
                                 </div>
                             ))}
                         </div>
@@ -216,140 +261,157 @@ export function LandingPage({ onStart }: LandingPageProps) {
                     {/* No puede */}
                     <div>
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-10 h-10 bg-[#B40023]/10 rounded-full flex items-center justify-center">
-                                <XCircleIcon className="w-6 h-6 text-[#B40023]" />
+                            <div className="w-10 h-10 bg-rose-50 rounded-full flex items-center justify-center">
+                                <XCircleIcon className="w-6 h-6 text-[#DB162F]" />
                             </div>
-                            <h3 className="text-2xl font-bold text-[#27231E]">
+                            <h3 className="text-2xl font-bold text-slate-900">
                                 ANMI NO puede:
                             </h3>
                         </div>
                         <div className="space-y-4">
                             {[
-                                "Reemplazar una consulta médica profesional.",
-                                "Diagnosticar enfermedades o condiciones médicas.",
-                                "Prescribir medicamentos o suplementos.",
-                                "Proporcionar tratamiento médico.",
-                                "Atender emergencias. En caso de urgencia, llama al 911 o acude a un centro de salud.",
-                                "Guardar datos sin tu consentimiento.",
+                                "Reemplazar la consulta con un pediatra o nutricionista.",
+                                "Dar diagnósticos o interpretar síntomas.",
+                                "Indicar medicamentos, suplementos o tratamientos.",
+                                "Crear dietas personalizadas o dar cantidades exactas de alimentos.",
+                                "Guardar tu información una vez que cierres la conversación.",
                             ].map((item, i) => (
                                 <div
                                     key={i}
-                                    className="flex gap-3 p-4 bg-[#B40023]/10 rounded-lg border border-[#B40023]/20"
+                                    className="flex gap-3 p-4 bg-rose-50 rounded-xl border border-rose-100"
                                 >
-                                    <XCircleIcon className="w-5 h-5 text-[#B40023] flex-shrink-0 mt-0.5" />
-                                    <p className="text-[#3D3A35] text-sm">{item}</p>
+                                    <XCircleIcon className="w-5 h-5 text-[#DB162F] flex-shrink-0 mt-0.5" />
+                                    <p className="text-slate-700 text-sm">{item}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12 p-6 bg-[#B40023]/5 border-l-4 border-[#B40023] rounded-lg flex gap-4">
-                    <AlertCircleIcon className="w-6 h-6 text-[#B40023] flex-shrink-0 mt-0.5" />
+                <div className="mt-12 p-6 bg-rose-50 border-l-4 border-[#DB162F] rounded-2xl flex gap-4">
+                    <AlertCircleIcon className="w-6 h-6 text-[#DB162F] flex-shrink-0 mt-0.5" />
                     <div>
-                        <h4 className="font-bold text-[#B40023] mb-2">Importante</h4>
-                        <p className="text-[#B40023]/90 text-sm">
-                            Si sospechas que tu hijo tiene anemia o presenta síntomas graves,
-                            consulta inmediatamente con un pediatra o nutricionista. ANMI es
-                            una herramienta educativa complementaria.
+                        <h4 className="font-bold text-[#DB162F] mb-2">Importante</h4>
+                        <p className="text-rose-900 text-sm">
+                            Si sospechas que tu hijo tiene anemia o presenta síntomas
+                            preocupantes, consulta inmediatamente con un pediatra o
+                            nutricionista. ANMI es una herramienta educativa complementaria y
+                            no reemplaza la atención profesional.
                         </p>
                     </div>
                 </div>
             </section>
 
             {/* Validación & confianza */}
-            <section className="bg-[#F5F3F0] py-16 sm:py-24">
+            <section className="bg-[#FFFBF0] py-16 sm:py-24">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-12">
-                        <h2 className="text-4xl sm:text-5xl font-bold text-[#27231E] mb-4">
+                        <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
                             Información validada y confiable
                         </h2>
-                        <p className="text-xl text-[#3D3A35]">
-                            ANMI se basa en guías oficiales de salud infantil.
+                        <p className="text-xl text-slate-600">
+                            ANMI utiliza contenido pre-cargado y revisado a partir de guías
+                            oficiales de salud infantil.
                         </p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        <Card className="p-8 bg-white border-2 border-[#C4E0F0] hover:shadow-lg transition-shadow text-center">
-                            <div className="text-5xl mb-4">🏛️</div>
-                            <h3 className="font-bold text-[#27231E] mb-3">MINSA</h3>
-                            <p className="text-[#3D3A35] text-sm">
-                                Normas y guías de salud materno infantil.
+                        <Card className="p-8 bg-white border-2 border-sky-100 hover:shadow-lg transition-shadow text-center rounded-2xl">
+                            <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <img src="/minsa.jpg" alt="Logo MINSA" className="w-full h-full object-contain" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-3">MINSA</h3>
+                            <p className="text-slate-600 text-sm">
+                                Basado en normas y guías de salud materno-infantil del
+                                Ministerio de Salud.
                             </p>
                         </Card>
 
-                        <Card className="p-8 bg-white border-2 border-[#C4E0F0] hover:shadow-lg transition-shadow text-center">
-                            <div className="text-5xl mb-4">🌍</div>
-                            <h3 className="font-bold text-[#27231E] mb-3">OMS</h3>
-                            <p className="text-[#3D3A35] text-sm">
-                                Recomendaciones internacionales basadas en evidencia.
+                        <Card className="p-8 bg-white border-2 border-sky-100 hover:shadow-lg transition-shadow text-center rounded-2xl">
+                            <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <img src="/oms.png" alt="Logo OMS" className="w-full h-full object-contain" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-3">OMS / OPS</h3>
+                            <p className="text-slate-600 text-sm">
+                                Referencias de recomendaciones internacionales basadas en
+                                evidencia.
                             </p>
                         </Card>
 
-                        <Card className="p-8 bg-white border-2 border-[#FDF0B2] hover:shadow-lg transition-shadow text-center">
-                            <div className="text-5xl mb-4">👨‍⚕️</div>
-                            <h3 className="font-bold text-[#27231E] mb-3">Nutricionistas</h3>
-                            <p className="text-[#3D3A35] text-sm">
-                                Contenido validado por expertos en nutrición infantil.
+                        <Card className="p-8 bg-white border-2 border-sky-100 hover:shadow-lg transition-shadow text-center rounded-2xl">
+                            <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                                <img src="/unmsm.png" alt="Logo UNMSM" className="w-full h-full object-contain" />
+                            </div>
+                            <h3 className="font-bold text-slate-900 mb-3">
+                                Equipo académico
+                            </h3>
+                            <p className="text-slate-600 text-sm">
+                                Contenido preparado y revisado por el equipo del proyecto, con
+                                enfoque ético y responsable.
                             </p>
                         </Card>
+
                     </div>
                 </div>
             </section>
 
             {/* CTA final */}
-            <section className="bg-[#C4E0F0] py-16 sm:py-24">
+            <section className="bg-[#DB162F] py-16 sm:py-24">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-4xl sm:text-5xl font-bold text-[#27231E] mb-6">
+                    <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
                         Comienza hoy mismo
                     </h2>
-                    <p className="text-xl text-[#3D3A35] mb-10 max-w-2xl mx-auto">
-                        Únete a madres, padres y cuidadores que usan ANMI para prevenir la
-                        anemia infantil y brindar lo mejor a sus hijos.
+                    <p className="text-xl text-slate-200 mb-10 max-w-2xl mx-auto">
+                        Usa ANMI como apoyo para cuidar la alimentación de tu bebé y
+                        acompañarlo en sus primeros pasos con más información y
+                        tranquilidad.
                     </p>
                     <Button
                         onClick={onStart}
-                        className="bg-white hover:bg-[#F5F3F0] text-[#27231E] px-10 py-4 text-lg font-bold shadow-md"
+                        className="bg-white hover:bg-slate-100 text-[#DB162F] px-10 py-4 text-lg font-bold shadow-md"
                     >
-                        Usar ANMI gratis
+                        Usar ANMI
                         <ArrowRightIcon className="w-5 h-5 ml-2" />
                     </Button>
                 </div>
             </section>
 
             {/* Footer */}
-            <footer className="bg-[#3D3A35] text-[#F5F3F0] py-12">
+            <footer className="bg-slate-950 text-slate-200 py-12">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-[#8B8680]">
+                    <div className="grid md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-slate-800">
                         {/* Info */}
                         <div>
                             <div className="flex items-center gap-2 mb-4">
-                                <div className="bg-[#B40023] p-2 rounded-lg">
-                                    <DropletIcon className="w-5 h-5 text-white" />
-                                </div>
-                                <h4 className="font-bold text-white">ANMI</h4>
+                                <img
+                                    src="/logo-blanco.svg"
+                                    alt="ANMI Logo"
+                                    className="h-10 w-auto"
+                                />
                             </div>
-                            <p className="text-sm text-[#F5F3F0]">
-                                Prevención de anemia infantil con información validada y segura.
+                            <p className="text-sm text-slate-300">
+                                Asistente educativo para la prevención de anemia infantil, con
+                                información clara y responsable.
                             </p>
                         </div>
 
+
                         {/* Enlaces */}
                         <div>
-                            <h4 className="font-bold text-white mb-4">Enlaces</h4>
+                            <h4 className="font-bold text-slate-100 mb-4">Enlaces</h4>
                             <ul className="space-y-2 text-sm">
                                 <li>
-                                    <a href="#" className="hover:text-[#C4E0F0] transition-colors">
+                                    <a href="#" className="hover:text-sky-200 transition-colors">
                                         Sobre ANMI
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-[#C4E0F0] transition-colors">
+                                    <a href="#" className="hover:text-sky-200 transition-colors">
                                         Preguntas frecuentes
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-[#C4E0F0] transition-colors">
+                                    <a href="#" className="hover:text-sky-200 transition-colors">
                                         Contacto
                                     </a>
                                 </li>
@@ -358,20 +420,20 @@ export function LandingPage({ onStart }: LandingPageProps) {
 
                         {/* Legal */}
                         <div>
-                            <h4 className="font-bold text-white mb-4">Legal</h4>
+                            <h4 className="font-bold text-slate-100 mb-4">Legal</h4>
                             <ul className="space-y-2 text-sm">
                                 <li>
-                                    <a href="#" className="hover:text-[#C4E0F0] transition-colors">
+                                    <a href="#" className="hover:text-sky-200 transition-colors">
                                         Aviso de privacidad
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-[#C4E0F0] transition-colors">
+                                    <a href="#" className="hover:text-sky-200 transition-colors">
                                         Disclaimer médico
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" className="hover:text-[#C4E0F0] transition-colors">
+                                    <a href="#" className="hover:text-sky-200 transition-colors">
                                         Términos de uso
                                     </a>
                                 </li>
@@ -379,37 +441,16 @@ export function LandingPage({ onStart }: LandingPageProps) {
                         </div>
                     </div>
 
-                    {/* Disclaimers */}
-                    <div className="space-y-4 mb-6">
-                        <div className="p-4 bg-[#8B8680]/20 rounded-lg border border-[#8B8680]/30">
-                            <h5 className="font-semibold text-white mb-2">
-                                ⚕️ Disclaimer médico
-                            </h5>
-                            <p className="text-xs text-[#F5F3F0]">
-                                ANMI es una herramienta educativa y NO proporciona diagnóstico,
-                                tratamiento ni reemplaza la consulta médica profesional. Si
-                                sospechas que tu hijo tiene anemia o presenta síntomas graves,
-                                consulta inmediatamente con un pediatra. En caso de emergencia,
-                                llama al servicio de emergencias de tu país.
-                            </p>
-                        </div>
-                        <div className="p-4 bg-[#8B8680]/20 rounded-lg border border-[#8B8680]/30">
-                            <h5 className="font-semibold text-white mb-2">
-                                🔒 Aviso de privacidad
-                            </h5>
-                            <p className="text-xs text-[#F5F3F0]">
-                                Tu privacidad es importante. Tus datos personales y los de tu
-                                bebé se guardan de forma segura y no se comparten con terceros.
-                                Puedes solicitar eliminar tu información en cualquier momento
-                                desde la aplicación.
-                            </p>
-                        </div>
-                    </div>
-
                     {/* Bottom */}
-                    <div className="text-center text-xs text-[#8B8680] border-t border-[#8B8680] pt-8">
-                        <p>© 2025 ANMI - Prevención de Anemia Infantil. Todos los derechos reservados.</p>
-                        <p className="mt-2">Basado en guías MINSA y OMS.</p>
+                    <div className="text-center text-xs text-slate-500 border-t border-slate-800 pt-8">
+                        <p>
+                            © 2025 ANMI - Prevención de Anemia Infantil. Todos los derechos
+                            reservados.
+                        </p>
+                        <p className="mt-2">
+                            Contenido basado en guías del MINSA, OMS y OPS y adaptado con
+                            fines educativos.
+                        </p>
                     </div>
                 </div>
             </footer>
