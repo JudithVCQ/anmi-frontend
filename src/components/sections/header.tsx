@@ -17,7 +17,7 @@ export function Header({ showButton = true, onButtonClick }: HeaderProps) {
         // Eliminado 'Etapas' y ajustados los demás para coincidir con el orden del scroll.
         { name: "Funcionalidades", href: "#funcionalidades" },
         { name: "Fuentes", href: "#fuentes" },
-        { name: "Comienza ahora", href: "#cta" }, // Apuntando a la sección CTA/Contacto
+        { name: "Aprende con ANMI", href: "#cta" }, // Apuntando a la sección CTA/Contacto
     ];
 
     // Estilo para el icono del botón (ajustado a w-4 h-4)
