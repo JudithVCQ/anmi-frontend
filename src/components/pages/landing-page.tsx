@@ -3,16 +3,16 @@
 "use client";
 
 // Componentes de Layout (Header, Footer)
-import { Header } from "./sections/header.tsx";
-import { Footer } from "./sections/Footer";
+import { Header } from "../sections/header.tsx";
+import { Footer } from "../sections/Footer.tsx";
 
 // Componentes de Sección (DEBES IMPORTAR TODOS LOS QUE CREASTE)
-import { SectionHero } from "./sections/SectionHero";
-import { SectionConocenos } from "./sections/SectionConocenos";
-import { SectionImportancia } from "./sections/SectionImportancia";
-import { SectionFuncionalidades } from "./sections/SectionFuncionalidades";
-import { SectionFuentes } from "./sections/SectionFuentes";
-import { SectionCTA } from "./sections/SectionCTA";
+import { SectionHero } from "../sections/SectionHero.tsx";
+import { SectionConocenos } from "../sections/SectionConocenos.tsx";
+import { SectionImportancia } from "../sections/SectionImportancia.tsx";
+import { SectionFuncionalidades } from "../sections/SectionFuncionalidades.tsx";
+import { SectionFuentes } from "../sections/SectionFuentes.tsx";
+import { SectionCTA } from "../sections/SectionCTA.tsx";
 
 interface LandingPageProps {
     onStart: () => void;

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { BabyInfo } from "../types/baby";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Header } from "./sections/header.tsx";
+import type { BabyInfo } from "../../types/baby.ts";
+import { Button } from "../ui/button.tsx";
+import { Card } from "../ui/card.tsx";
+import { Header } from "../sections/header.tsx";
 
 interface OnboardingFormProps {
     onSubmit: (data: BabyInfo) => void;

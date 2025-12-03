@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import type { BabyInfo } from "../types/baby";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { enviarPregunta } from "../lib/api";
-import { Header } from "./sections/header.tsx";
+import type { BabyInfo } from "../../types/baby.ts";
+import { Button } from "../ui/button.tsx";
+import { Card } from "../ui/card.tsx";
+import { enviarPregunta } from "../../lib/api.ts";
+import { Header } from "../sections/header.tsx";
 
 interface ChatbotProps {
     babyInfo: BabyInfo | null;

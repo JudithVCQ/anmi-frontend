@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { LandingPage } from "./components/landing-page";
-import { OnboardingForm } from "./components/onboarding-form";
-import { Chatbot } from "./components/chatbot";
+import { LandingPage } from "./components/pages/landing-page.tsx";
+import { OnboardingForm } from "./components/pages/onboarding-form.tsx";
+import { Chatbot } from "./components/pages/chatbot.tsx";
 import type { BabyInfo } from "./types/baby";
 
 type AppView = "landing" | "onboarding" | "chatbot";
