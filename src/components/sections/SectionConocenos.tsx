@@ -2,15 +2,22 @@
 
 import { Card } from "../ui/card";
 
+// AÑADIDO: Definición de la interfaz de propiedades para aceptar el 'id'
+interface SectionConocenosProps {
+    id: string;
+}
+
 // Iconos de Google Material Symbols
 const iconStyle = {
     fontSize: '36px',
     lineHeight: '1',
 };
 
-export function SectionConocenos() {
+// MODIFICADO: Ahora el componente recibe la prop 'id'
+export function SectionConocenos({ id }: SectionConocenosProps) {
     return (
-        <section id="conocenos" className="bg-white py-16 sm:py-24">
+        // MODIFICADO: Usamos la prop 'id' en lugar del string fijo
+        <section id={id} className="bg-white py-16 sm:py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* 1. Introducción y Misión Ética (Sutil) */}

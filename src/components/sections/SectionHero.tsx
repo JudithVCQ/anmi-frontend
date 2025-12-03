@@ -1,11 +1,14 @@
+// src/components/sections/SectionHero.tsx
+
 "use client";
 
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-// ❌ YA NO NECESITAS IMPORTAR ICONOS DE 'lucide-react' ❌
 
 interface SectionHeroProps {
     onStart: () => void;
+    // 👈 AÑADIDO: Ahora el componente acepta la prop 'id'
+    id: string;
 }
 
 // Estilo base para todos los iconos de Google Icons
@@ -14,9 +17,11 @@ const iconStyle = {
     lineHeight: '1',  // Para centrado y alineación
 };
 
-export function SectionHero({ onStart }: SectionHeroProps) {
+// 👈 AÑADIDO: Ahora la función recibe el 'id'
+export function SectionHero({ id, onStart }: SectionHeroProps) {
     return (
-        <section id="inicio" className="relative overflow-hidden">
+        // 👈 MODIFICADO: Usamos la prop 'id' en lugar de un string fijo
+        <section id={id} className="relative overflow-hidden">
             {/* Fondo */}
             <div className="absolute inset-0 -z-10">
                 <img

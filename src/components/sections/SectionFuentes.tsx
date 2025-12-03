@@ -2,12 +2,18 @@
 
 import { Card } from "../ui/card";
 
-export function SectionFuentes() {
+// 👈 AÑADIDO: Definición de la interfaz de propiedades para aceptar el 'id'
+interface SectionFuentesProps {
+    id: string;
+}
+
+// MODIFICADO: Ahora el componente recibe la prop 'id'
+export function SectionFuentes({ id }: SectionFuentesProps) {
     return (
         // ******************************************************
-        // IMPORTANTE: Se añade el ID de anclaje para la navegación
+        // MODIFICADO: Usamos la prop 'id' en lugar del string fijo "fuentes"
         // ******************************************************
-        <section id="fuentes" className="bg-[#FFFBF0] py-16 sm:py-24">
+        <section id={id} className="bg-[#FFFBF0] py-16 sm:py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">

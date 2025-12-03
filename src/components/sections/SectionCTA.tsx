@@ -4,14 +4,17 @@ import { Button } from "../ui/button";
 
 interface SectionCTAProps {
     onStart: () => void;
+    // 👈 AÑADIDO: Ahora el componente acepta la prop 'id'
+    id: string;
 }
 
-export function SectionCTA({ onStart }: SectionCTAProps) {
+// MODIFICADO: Ahora el componente recibe la prop 'id'
+export function SectionCTA({ id, onStart }: SectionCTAProps) {
     return (
         // ******************************************************
-        // IMPORTANTE: Se añade el ID de anclaje para la navegación
+        // MODIFICADO: Usamos la prop 'id' (será 'cta') en lugar del string fijo "comenzar"
         // ******************************************************
-        <section id="comenzar" className="bg-[#DB162F] py-16 sm:py-24">
+        <section id={id} className="bg-[#DB162F] py-16 sm:py-24">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
                     Comienza hoy mismo

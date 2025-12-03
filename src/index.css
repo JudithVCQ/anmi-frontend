@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* Fuente global */
 body {
     @apply font-sans bg-white text-[#27231E];

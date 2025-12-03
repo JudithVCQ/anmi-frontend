@@ -27,22 +27,28 @@ export function LandingPage({ onStart }: LandingPageProps) {
             {/* Ensamblaje de las secciones en el orden de scroll */}
 
             {/* 2. INICIO / HERO */}
-            <SectionHero onStart={onStart} />
+            {/* IMPORTANTE: Le pasamos el ID 'inicio' */}
+            <SectionHero id="inicio" onStart={onStart} />
 
-            {/* 3. CONÓCENOS / MISIÓN ÉTICA (Nuevo componente sobre el equipo) */}
-            <SectionConocenos />
+            {/* 3. CONÓCENOS / MISIÓN ÉTICA */}
+            {/* IMPORTANTE: Le pasamos el ID 'conocenos' */}
+            <SectionConocenos id="conocenos" />
 
             {/* 4. IMPORTANCIA (Riesgos de anemia) */}
-            <SectionImportancia />
+            {/* IMPORTANTE: Le pasamos el ID 'importancia' */}
+            <SectionImportancia id="importancia" />
 
             {/* 5. FUNCIONALIDADES (Qué hace y qué NO hace ANMI) */}
-            <SectionFuncionalidades />
+            {/* IMPORTANTE: Le pasamos el ID 'funcionalidades' */}
+            <SectionFuncionalidades id="funcionalidades" />
 
             {/* 6. FUENTES / VALIDACIÓN (MINSA, OMS, Equipo académico) */}
-            <SectionFuentes />
+            {/* IMPORTANTE: Le pasamos el ID 'fuentes' */}
+            <SectionFuentes id="fuentes" />
 
             {/* 7. CTA FINAL (Comienza hoy mismo) */}
-            <SectionCTA onStart={onStart} />
+            {/* IMPORTANTE: Le pasamos el ID 'cta' (Referenciado como Contacto en el Header) */}
+            <SectionCTA id="cta" onStart={onStart} />
 
             {/* 8. FOOTER (Pie de página) */}
             <Footer />
