@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { BabyInfo } from "../types/baby";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { Header } from "./header";
+import { Header } from "./sections/header.tsx";
 
 interface OnboardingFormProps {
     onSubmit: (data: BabyInfo) => void;

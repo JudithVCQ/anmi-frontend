@@ -1,4 +1,4 @@
-import { Button } from "./ui/button";
+import { Button } from "../ui/button.tsx";
 import { ArrowRightIcon } from "lucide-react";
 
 interface HeaderProps {

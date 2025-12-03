@@ -5,7 +5,7 @@ import type { BabyInfo } from "../types/baby";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { enviarPregunta } from "../lib/api";
-import { Header } from "./header";
+import { Header } from "./sections/header.tsx";
 
 interface ChatbotProps {
     babyInfo: BabyInfo | null;
