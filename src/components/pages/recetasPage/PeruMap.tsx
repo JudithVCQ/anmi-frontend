@@ -144,7 +144,7 @@ export function PeruMap() {
                     className="cursor-pointer"
                     onMouseEnter={() => setHoveredRegion("selva")}
                     onMouseLeave={() => setHoveredRegion(null)}
-                    onClick={() => navigate("/recetas/selva")}
+                    onClick={() => navigate("/recetas/selva/pure-yuca-higado")}
                 />
 
                 {/* --- NIÑOS: ocupan toda la región, sin máscara (no se cortan) --- */}

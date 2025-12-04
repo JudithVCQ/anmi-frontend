@@ -15,6 +15,7 @@ import MapaPage from "./components/pages/mapaPage";
 // --- RECETAS ESPECÍFICAS ---
 import HigadoPrimaveralSierra from "./components/pages/recetasPage/sierra/higado-primaveral";
 import SudaditoPescadoCosta from "./components/pages/recetasPage/costa/sudadito-de-pescado";
+import PureYucaHigadoSelva from "./components/pages/recetasPage/selva/pure-yuca-higado.tsx";
 
 // ---------------------------------------------
 // 1. FLUJO PRINCIPAL (Landing -> Form -> Chat)
@@ -80,6 +81,12 @@ function App() {
             <Route
                 path="/recetas/costa/sudadito-de-pescado"
                 element={<SudaditoPescadoCosta />}
+            />
+
+            {/* ⭐ Receta específica de la Selva */}
+            <Route
+                path="/recetas/selva/pure-yuca-higado"
+                element={<PureYucaHigadoSelva />}
             />
 
 
