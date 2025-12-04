@@ -1,17 +1,19 @@
 // src/App.tsx
 
-import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import {Routes, Route} from "react-router-dom";
+import {useState} from "react";
 
 // --- TUS COMPONENTES ACTUALES ---
-import { LandingPage } from "./components/pages/landing-page.tsx";
-import { OnboardingForm } from "./components/pages/onboarding-form.tsx";
-import { Chatbot } from "./components/pages/chatbot.tsx";
-import type { BabyInfo } from "./types/baby";
+import {LandingPage} from "./components/pages/landing-page.tsx";
+import {OnboardingForm} from "./components/pages/onboarding-form.tsx";
+import {Chatbot} from "./components/pages/chatbot.tsx";
+import type {BabyInfo} from "./types/baby";
 
 // --- TUS NUEVOS COMPONENTES (MAPA) ---
-// Asegúrate de que el nombre del archivo coincida exactamente (mayúsculas/minúsculas)
 import MapaPage from "./components/pages/mapaPage";
+
+// --- COMPONENTE DE APRENDIZAJE ---
+import AprendeANMIPage from "./components/pages/aprendeANMIPage/aprende-anmi.page.tsx";
 
 // ----------------------------------------------------------------------
 // 1. COMPONENTE 'MAIN FLOW': Mantiene tu lógica original de estados
@@ -53,10 +55,10 @@ function MainFlow() {
     }
 
     if (currentView === "chatbot") {
-        return <Chatbot babyInfo={babyInfo} onEnd={handleEndChat} />;
+        return <Chatbot babyInfo={babyInfo} onEnd={handleEndChat}/>;
     }
 
-    return <LandingPage onStart={handleStart} />;
+    return <LandingPage onStart={handleStart}/>;
 }
 
 // ----------------------------------------------------------------------
@@ -67,11 +69,15 @@ function App() {
         <Routes>
             {/* RUTA PRINCIPAL (http://localhost:5173/) */}
             {/* Muestra tu flujo actual: Landing -> Form -> Chat */}
-            <Route path="/" element={<MainFlow />} />
+            <Route path="/" element={<MainFlow/>}/>
 
             {/* RUTA DEL MAPA (http://localhost:5173/mapa) */}
             {/* Esta es la página a la que te lleva el botón "Ver recetas" */}
-            <Route path="/mapa" element={<MapaPage />} />
+            <Route path="/mapa" element={<MapaPage/>}/>
+
+            {/* RUTA DE APRENDE CON ANMI (http://localhost:5173/aprende-anmi) */}
+            {/* Esta es la página educativa con videos y tips */}
+            <Route path="/aprende-anmi" element={<AprendeANMIPage/>}/>
 
             {/* RUTA DE RECETAS (http://localhost:5173/recetas/costa, etc.) */}
             {/* Placeholder temporal hasta que creemos RecetasPage */}

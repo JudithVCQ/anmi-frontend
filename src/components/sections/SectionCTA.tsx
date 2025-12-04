@@ -2,15 +2,13 @@
 
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
-
 interface SectionCTAProps {
     onStart: () => void;
     id: string;
 }
 
-export function SectionCTA({ id, onStart }: SectionCTAProps) {
+export function SectionCTA({ id}: SectionCTAProps) {
     const navigate = useNavigate();
-
     return (
         <section id={id} className="bg-[#DB162F] py-16 sm:py-24 relative overflow-hidden">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -33,15 +31,18 @@ export function SectionCTA({ id, onStart }: SectionCTAProps) {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
 
                     {/* BOTÓN 1: IR A LA SECCIÓN EDUCATIVA */}
-                    <Button
-                        onClick={onStart}
-                        className="bg-white hover:bg-slate-100 text-[#DB162F] px-10 py-6 text-lg font-bold shadow-lg w-full sm:w-auto transition-transform hover:scale-105"
+                    <button
+                        onClick={() => navigate('/aprende-anmi')}
+                        className="bg-white hover:bg-gray-100 text-[#DB162F] px-8 py-4 rounded-full text-xl font-bold shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
                     >
-                        Aprender ahora
-                        <span className="material-symbols-outlined text-xl ml-2">
-                            menu_book
-                        </span>
-                    </Button>
+                        Aprende ahora
+                        <span className="material-symbols-outlined text-xl">menu_book</span>
+                    </button>
+
+
+
+
+
 
                     {/* BOTÓN 2: VER RECETAS (Ruta /mapa) */}
                     <Button
