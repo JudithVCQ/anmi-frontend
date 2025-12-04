@@ -3,29 +3,29 @@
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
-// --- TUS COMPONENTES ACTUALES ---
+// --- COMPONENTES ACTUALES ---
 import { LandingPage } from "./components/pages/landing-page.tsx";
 import { OnboardingForm } from "./components/pages/onboarding-form.tsx";
 import { Chatbot } from "./components/pages/chatbot.tsx";
 import type { BabyInfo } from "./types/baby";
 
-// --- TUS NUEVOS COMPONENTES (MAPA) ---
-// Asegúrate de que el nombre del archivo coincida exactamente (mayúsculas/minúsculas)
+// --- MAPA ---
 import MapaPage from "./components/pages/mapaPage";
 
-// ----------------------------------------------------------------------
-// 1. COMPONENTE 'MAIN FLOW': Mantiene tu lógica original de estados
-//    (Landing -> Onboarding -> Chatbot)
-// ----------------------------------------------------------------------
+// --- RECETAS ESPECÍFICAS ---
+import HigadoPrimaveralSierra from "./components/pages/recetasPage/sierra/higado-primaveral";
+import SudaditoPescadoCosta from "./components/pages/recetasPage/costa/sudadito-de-pescado";
+
+// ---------------------------------------------
+// 1. FLUJO PRINCIPAL (Landing -> Form -> Chat)
+// ---------------------------------------------
 type AppView = "landing" | "onboarding" | "chatbot";
 
 function MainFlow() {
     const [currentView, setCurrentView] = useState<AppView>("landing");
     const [babyInfo, setBabyInfo] = useState<BabyInfo | null>(null);
 
-    const handleStart = () => {
-        setCurrentView("onboarding");
-    };
+    const handleStart = () => setCurrentView("onboarding");
 
     const handleBackToLanding = () => {
         setCurrentView("landing");
@@ -42,7 +42,6 @@ function MainFlow() {
         setBabyInfo(null);
     };
 
-    // Renderizado condicional clásico
     if (currentView === "onboarding") {
         return (
             <OnboardingForm
@@ -59,29 +58,41 @@ function MainFlow() {
     return <LandingPage onStart={handleStart} />;
 }
 
-// ----------------------------------------------------------------------
-// 2. COMPONENTE PRINCIPAL 'APP': Maneja las rutas (URLs)
-// ----------------------------------------------------------------------
+// ------------------------------------------------
+// 2. APP: Manejo de rutas
+// ------------------------------------------------
 function App() {
     return (
         <Routes>
-            {/* RUTA PRINCIPAL (http://localhost:5173/) */}
-            {/* Muestra tu flujo actual: Landing -> Form -> Chat */}
+            {/* HOME */}
             <Route path="/" element={<MainFlow />} />
 
-            {/* RUTA DEL MAPA (http://localhost:5173/mapa) */}
-            {/* Esta es la página a la que te lleva el botón "Ver recetas" */}
+            {/* MAPA */}
             <Route path="/mapa" element={<MapaPage />} />
 
-            {/* RUTA DE RECETAS (http://localhost:5173/recetas/costa, etc.) */}
-            {/* Placeholder temporal hasta que creemos RecetasPage */}
+            {/* ⭐ Receta específica de la Sierra */}
+            <Route
+                path="/recetas/sierra/higado-primaveral"
+                element={<HigadoPrimaveralSierra />}
+            />
+
+            {/* ⭐ Nueva receta de la Costa */}
+            <Route
+                path="/recetas/costa/sudadito-de-pescado"
+                element={<SudaditoPescadoCosta />}
+            />
+
+
+            {/* Fallback general mientras creamos más recetas */}
             <Route
                 path="/recetas/:region"
                 element={
                     <div className="p-10 text-center">
                         <h1 className="text-2xl font-bold">Próximamente: Recetas</h1>
                         <p>Aquí cargaremos las recetas de la región seleccionada.</p>
-                        <a href="/mapa" className="text-blue-500 underline">Volver al mapa</a>
+                        <a href="/mapa" className="text-blue-500 underline">
+                            Volver al mapa
+                        </a>
                     </div>
                 }
             />
