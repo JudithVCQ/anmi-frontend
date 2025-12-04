@@ -55,7 +55,7 @@ function MainFlow() {
     }
 
     if (currentView === "chatbot") {
-        return <Chatbot babyInfo={babyInfo} onEnd={handleEndChat}/>;
+        return <Chatbot babyInfo={babyInfo} onEnd={handleEndChat} chatState={undefined}/>;
     }
 
     return <LandingPage onStart={handleStart}/>;
@@ -77,7 +77,7 @@ function App() {
 
             {/* RUTA DE APRENDE CON ANMI (http://localhost:5173/aprende-anmi) */}
             {/* Esta es la página educativa con videos y tips */}
-            <Route path="/aprende-anmi" element={<AprendeANMIPage/>}/>
+            <Route path="/aprender" element={<AprendeANMIPage />} />
 
             {/* RUTA DE RECETAS (http://localhost:5173/recetas/costa, etc.) */}
             {/* Placeholder temporal hasta que creemos RecetasPage */}

@@ -29,15 +29,21 @@ export function SectionCTA({ id}: SectionCTAProps) {
 
                 {/* BOTONES */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-
-                    {/* BOTÓN 1: IR A LA SECCIÓN EDUCATIVA */}
-                    <button
-                        onClick={() => navigate('/aprende-anmi')}
-                        className="bg-white hover:bg-gray-100 text-[#DB162F] px-8 py-4 rounded-full text-xl font-bold shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+                    {/* BOTÓN 1: IR A LA SECCIÓN EDUCATIVA (Mismo estilo de letra que el botón "Ver recetas") */}
+                    <Button
+                        onClick={() => navigate('/aprender')}
+                        className="
+        bg-white hover:bg-gray-100
+        text-[#DB162F]
+        px-10 py-6 text-lg font-bold   {/* <--- ESTILO DE TEXTO Y PADDING CORREGIDO */}
+        rounded-full
+        shadow-lg transition-all duration-300 transform hover:scale-105
+        flex items-center gap-2
+        w-full sm:w-auto
+    "
                     >
                         Aprende ahora
-                        <span className="material-symbols-outlined text-xl">menu_book</span>
-                    </button>
+                    </Button>
 
 
 
