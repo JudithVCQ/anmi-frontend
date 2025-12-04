@@ -1,110 +1,119 @@
 // src/App.tsx
 
-import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
-
-// --- COMPONENTES ACTUALES ---
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Chatbot } from "./components/pages/chatbot.tsx";
 import { LandingPage } from "./components/pages/landing-page.tsx";
 import { OnboardingForm } from "./components/pages/onboarding-form.tsx";
-import { Chatbot } from "./components/pages/chatbot.tsx";
+import { useAnmiChat } from "./hooks/use-anmi-chat.ts";
 import type { BabyInfo } from "./types/baby";
-
-// --- MAPA ---
 import MapaPage from "./components/pages/mapaPage";
-
-// --- RECETAS ESPECÍFICAS ---
 import HigadoPrimaveralSierra from "./components/pages/recetasPage/sierra/higado-primaveral";
 import SudaditoPescadoCosta from "./components/pages/recetasPage/costa/sudadito-de-pescado";
 import PureYucaHigadoSelva from "./components/pages/recetasPage/selva/pure-yuca-higado.tsx";
 
-// ---------------------------------------------
-// 1. FLUJO PRINCIPAL (Landing -> Form -> Chat)
-// ---------------------------------------------
-type AppView = "landing" | "onboarding" | "chatbot";
+function ChatbotRoute() {
+    const navigate = useNavigate();
+    const [babyInfo] = useState<BabyInfo | null>(() => {
+        const saved = sessionStorage.getItem("babyInfo");
+        return saved ? JSON.parse(saved) : null;
+    });
 
-function MainFlow() {
-    const [currentView, setCurrentView] = useState<AppView>("landing");
-    const [babyInfo, setBabyInfo] = useState<BabyInfo | null>(null);
+    const chatState = useAnmiChat(babyInfo);
 
-    const handleStart = () => setCurrentView("onboarding");
-
-    const handleBackToLanding = () => {
-        setCurrentView("landing");
-        setBabyInfo(null);
+    const handleEnd = () => {
+        sessionStorage.removeItem("babyInfo");
+        sessionStorage.removeItem("chatPopup");
+        navigate("/");
     };
 
-    const handleFormSubmit = (data: BabyInfo) => {
-        setBabyInfo(data);
-        setCurrentView("chatbot");
+    const handleMinimize = () => {
+        sessionStorage.setItem("chatPopup", "true");
+        navigate("/");
     };
 
-    const handleEndChat = () => {
-        setCurrentView("landing");
-        setBabyInfo(null);
-    };
-
-    if (currentView === "onboarding") {
-        return (
-            <OnboardingForm
-                onSubmit={handleFormSubmit}
-                onBack={handleBackToLanding}
-            />
-        );
+    if (!babyInfo) {
+        navigate("/formulario");
+        return null;
     }
 
-    if (currentView === "chatbot") {
-        return <Chatbot babyInfo={babyInfo} onEnd={handleEndChat} />;
-    }
-
-    return <LandingPage onStart={handleStart} />;
+    return (
+        <Chatbot
+            babyInfo={babyInfo}
+            onEnd={handleEnd}
+            initialMode="fullscreen"
+            onMinimize={handleMinimize}
+            chatState={chatState}
+        />
+    );
 }
 
-// ------------------------------------------------
-// 2. APP: Manejo de rutas
-// ------------------------------------------------
-function App() {
+function AppWithPopup() {
+    const [showPopup, setShowPopup] = useState(false);
+    const [babyInfo, setBabyInfo] = useState<BabyInfo | null>(null);
+
+    useEffect(() => {
+        const checkPopup = () => {
+            const hasPopup = sessionStorage.getItem("chatPopup") === "true";
+            const saved = sessionStorage.getItem("babyInfo");
+            if (hasPopup && saved) {
+                setShowPopup(true);
+                setBabyInfo(JSON.parse(saved));
+            } else {
+                setShowPopup(false);
+            }
+        };
+
+        checkPopup();
+        const interval = setInterval(checkPopup, 100);
+        return () => clearInterval(interval);
+    }, []);
+
+    const chatState = useAnmiChat(showPopup ? babyInfo : null);
+
+    const closePopup = () => {
+        sessionStorage.removeItem("chatPopup");
+        sessionStorage.removeItem("babyInfo");
+        setShowPopup(false);
+    };
+
+    const maximizePopup = () => {
+        sessionStorage.removeItem("chatPopup");
+        window.location.href = "/chatbot";
+    };
+
     return (
-        <Routes>
-            {/* HOME */}
-            <Route path="/" element={<MainFlow />} />
+        <>
+            <Routes>
+                <Route path="/" element={<LandingPage onStart={() => window.location.href = "/formulario"} />} />
+                <Route path="/formulario" element={<OnboardingForm onSubmit={(data) => {
+                    sessionStorage.setItem("babyInfo", JSON.stringify(data));
+                    window.location.href = "/chatbot";
+                }} onBack={() => window.location.href = "/"} />} />
+                <Route path="/chatbot" element={<ChatbotRoute />} />
+                <Route path="/mapa" element={<MapaPage />} />
+                <Route path="/recetas/sierra/higado-primaveral" element={<HigadoPrimaveralSierra />} />
+                <Route path="/recetas/costa/sudadito-de-pescado" element={<SudaditoPescadoCosta />} />
+                <Route path="/recetas/selva/pure-yuca-higado" element={<PureYucaHigadoSelva />} />
+            </Routes>
 
-            {/* MAPA */}
-            <Route path="/mapa" element={<MapaPage />} />
-
-            {/* ⭐ Receta específica de la Sierra */}
-            <Route
-                path="/recetas/sierra/higado-primaveral"
-                element={<HigadoPrimaveralSierra />}
-            />
-
-            {/* ⭐ Nueva receta de la Costa */}
-            <Route
-                path="/recetas/costa/sudadito-de-pescado"
-                element={<SudaditoPescadoCosta />}
-            />
-
-            {/* ⭐ Receta específica de la Selva */}
-            <Route
-                path="/recetas/selva/pure-yuca-higado"
-                element={<PureYucaHigadoSelva />}
-            />
-
-
-            {/* Fallback general mientras creamos más recetas */}
-            <Route
-                path="/recetas/:region"
-                element={
-                    <div className="p-10 text-center">
-                        <h1 className="text-2xl font-bold">Próximamente: Recetas</h1>
-                        <p>Aquí cargaremos las recetas de la región seleccionada.</p>
-                        <a href="/mapa" className="text-blue-500 underline">
-                            Volver al mapa
-                        </a>
-                    </div>
-                }
-            />
-        </Routes>
+            {showPopup && babyInfo && (
+                <div style={{ position: 'fixed', bottom: '24px', right: '24px', zIndex: 9999 }}>
+                    <Chatbot
+                        babyInfo={babyInfo}
+                        onEnd={closePopup}
+                        initialMode="popup"
+                        onClose={maximizePopup}
+                        chatState={chatState}
+                    />
+                </div>
+            )}
+        </>
     );
+}
+
+function App() {
+    return <AppWithPopup />;
 }
 
 export default App;
