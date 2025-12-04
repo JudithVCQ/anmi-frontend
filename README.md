@@ -1,1 +1,4 @@
 
+DEPENDENCIAS:
+npm install
+npm install @google/generative-ai
